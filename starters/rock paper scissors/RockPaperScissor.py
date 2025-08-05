@@ -29,7 +29,7 @@ class RockPaperScissors:
     @staticmethod
     def validateWinner(usr: str, aiChoice):
         if usr == aiChoice:
-            print("It's tie")
+            print("It's a tie")
         elif usr == 'rock' and aiChoice == 'scissors':
             print("You win")
         elif usr == 'paper' and aiChoice == 'rock':
