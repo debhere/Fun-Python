@@ -21,6 +21,10 @@ A pure dice simulator. User can select how many dice she wants to roll and our s
 
 ### 4. hangman
 
-This is the implementation of an old popular game of hangman where user is asked to guess the letter of an word. Few wrong guesses are allowed.
+This is the implementation of an old yet popular game of hangman where user is asked to guess the letter of an word. Few wrong guesses are allowed.
+
+### 5. Rock-Paper-Scissors
+
+Probably one of the best games ever. This is the python implementation.
 
 
