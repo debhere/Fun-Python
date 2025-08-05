@@ -27,4 +27,9 @@ This is the implementation of an old yet popular game of hangman where user is a
 
 Probably one of the best games ever. This is the python implementation.
 
+### 6. Password Generator
+
+This is python implementation of password generation where passwords with given length and combination will be generated.
+
+
 
