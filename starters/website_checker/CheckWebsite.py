@@ -8,6 +8,7 @@ def get_user_agent() -> str:
     agent = UserAgent()
     return agent.chrome
 
+
 def get_status_description(status_code: int) -> str:
     desc = "??? Unknown status code"
     for status in HTTPStatus:
@@ -15,12 +16,14 @@ def get_status_description(status_code: int) -> str:
             desc = status.description
     return desc
 
+
 def check_website(site: str, user_agent: str):
     try:
         response = requests.get(site, headers={'User-Agent': user_agent})
         print(f"{site} <=> {response}: {get_status_description(response.status_code)}")
     except Exception as e:
         print(f"Could not get information from this website: {site}")
+
 
 def get_site_list(filepath: str) -> list[str]:
     sites = []
@@ -31,6 +34,7 @@ def get_site_list(filepath: str) -> list[str]:
                 row[0] = "https://" + row[0]
             sites.append(row[0])
     return sites
+
 
 def main():
     agent = get_user_agent()
