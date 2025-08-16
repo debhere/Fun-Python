@@ -77,10 +77,8 @@ class FolderSorter:
         try:
             # filepath: Path = Path(self.filename_lbl.cget("text"))
             for root, dirs, files in os.walk(filepath):
-                if not dirs and not files:
-                    os.rmdir(root)
-                else:
-                    self.delete_empty_folders(dirs)
+                if len(dirs) == 0 and len(files) == 0:
+                    os.removedirs(root)
         except Exception as e:
             print(e)
 
