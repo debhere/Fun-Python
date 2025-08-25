@@ -3,8 +3,8 @@ import pyshorteners
 
 def short_url(url: str) -> str:
     shortener = pyshorteners.Shortener()
-    short_url = shortener.tinyurl.short(url)
-    return short_url
+    shortened = shortener.tinyurl.short(url)
+    return shortened
 
 
 if __name__ == "__main__":
