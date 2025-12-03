@@ -57,4 +57,8 @@ pip install pathlib
 pip install -U textblob
 python -m textblob.download_corpora
 ```
+## Bigger
+### Telegram Bot
+
+A telegram bot created as a career counsellor which is integrated with gemini. Need to add more details.
 
