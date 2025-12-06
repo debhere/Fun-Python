@@ -12,7 +12,7 @@ def _getLargeLanguageClient(key=None, endpoint=None):
     return client
 
 
-def generateBrochure(contents, links):
+def brochureGenerator(contents, links):
     info = _getModelInfo()
     gemini_api = info.gemini_api_key
     endpoint = info.gemini_url
@@ -27,8 +27,14 @@ def generateBrochure(contents, links):
         {"role": "system", "content": info.system_prompt_generate},
         {"role": "user", "content": user_prompt}
     ]
-    response = gemini.chat.completions.create(model=model, messages=messages)
-    return response.choices[0].message.content
+    # response = gemini.chat.completions.create(model=model, messages=messages)
+    # return response.choices[0].message.content
+    stream = gemini.chat.completions.create(model=model, messages=messages, stream=True)
+
+    response = ""
+    for chunk in stream:
+        response += chunk.choices[0].delta.content or ""
+        yield response
 
 
 def translateBrochure(brochure, language='bengali'):

@@ -14,7 +14,7 @@ class ModelInfo:
     gpt_translation_model: str = 'gpt-5-mini'
     gemini_brochure_model: str = 'gemini-2.5-flash'
 
-    gemini_url: str = "https://generativelanguage.googleapis.com/v1beta"
+    gemini_url: str = "https://generativelanguage.googleapis.com/v1beta/openai"
 
     system_prompt_generate: str = """
     You are a professional consultant who has worked for the best consulting firms across the globe. You

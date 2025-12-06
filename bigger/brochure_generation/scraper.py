@@ -1,12 +1,15 @@
 from bs4 import BeautifulSoup
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 import time
-from model import generateBrochure, translateBrochure
+from model import brochureGenerator, translateBrochure
 
 
 def get_content(url):
-    driver = webdriver.Chrome(keep_alive=False)
+    options = Options()
+    options.add_argument('--headless=new')
+    driver = webdriver.Chrome(keep_alive=False, options=options)
     driver.get(url)
     time.sleep(2)
 
@@ -36,7 +39,8 @@ def get_content(url):
 
 
 if __name__ == "__main__":
-    c, l = get_content("https://www.revolut.com")
-    brochure = generateBrochure(c, l)
-    bengaliBrochure = translateBrochure(brochure, language='bengali')
-    print(bengaliBrochure)
+    c, l = get_content("https://www.edwarddonner.com")
+    # brochure = brochureGenerator(c, l)
+    # bengaliBrochure = translateBrochure(brochure, language='bengali')
+    # print(bengaliBrochure)
+    print(*brochureGenerator(c, l))
