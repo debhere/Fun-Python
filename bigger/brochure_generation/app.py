@@ -1,7 +1,7 @@
 import gradio as gr
 import requests
 from scraper import get_content
-from model import brochureGenerator
+from model import brochureGenerator, brochureTranslater
 
 
 def generateBrochure(website: str):
@@ -15,16 +15,37 @@ def generateBrochure(website: str):
         return e
 
 
+def EnableTranslation():
+    return gr.Button(interactive=True)
+
+
+def EnableLanguageSelection():
+    return gr.Dropdown(interactive=True)
+
+
+def clearMarkdown():
+    return gr.Markdown(value='')
+
+
+def translateBrochure(content, language):
+    translated = brochureTranslater(content, language)
+    yield from translated
+
+
 with gr.Blocks() as app:
     url = gr.Textbox(label="Enter the url of your website")
     markdown = gr.Markdown(label="Response: ")
 
     generateBtn = gr.Button("Generate Brochure")
     translateBtn = gr.Button("Translate Brochure", interactive=False)
-    language = gr.Dropdown(['Bengali', 'Kannada', 'Hindi'], value='Bengali', interactive=False)
+    languageSelect = gr.Dropdown(['Bengali', 'Spanish', 'French'], value='Bengali', interactive=False)
 
     generateBtn.click(fn=generateBrochure, inputs=url, outputs=markdown)
 
+    gr.on([generateBtn.click], EnableTranslation, None, translateBtn)
+    gr.on([generateBtn.click], EnableLanguageSelection, None, languageSelect)
+
+    translateBtn.click(fn=translateBrochure, inputs=[markdown, languageSelect], outputs=markdown)
 
 if __name__ == "__main__":
     app.launch()

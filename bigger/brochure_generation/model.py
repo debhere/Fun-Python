@@ -37,19 +37,26 @@ def brochureGenerator(contents, links):
         yield response
 
 
-def translateBrochure(brochure, language='bengali'):
+def brochureTranslater(brochure, language='bengali'):
     info = _getModelInfo()
     openai_api = info.openai_api_key
     gpt_model = info.gpt_translation_model
     gpt = _getLargeLanguageClient(openai_api)
     system_prompt = info.system_prompt_translate
     user_prompt = f"""
-    Here is a brochure in english which is markdown. Translate the brochure in {language} and respond in 
+    Here is a brochure in english which is either in text or markdown. Translate the brochure in {language} and respond in 
     markdown. {brochure}
     """
     messages = [
         {"role": "system", "content": system_prompt},
         {"role": "user", "content": user_prompt}
     ]
-    response = gpt.chat.completions.create(model=gpt_model, messages=messages)
-    return response.choices[0].message.content
+    # response = gpt.chat.completions.create(model=gpt_model, messages=messages)
+    # return response.choices[0].message.content
+
+    stream = gpt.chat.completions.create(model=gpt_model, messages=messages, stream=True)
+
+    response = ""
+    for chunk in stream:
+        response += chunk.choices[0].delta.content or ""
+        yield response

@@ -3,7 +3,6 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 import time
-from model import brochureGenerator, translateBrochure
 
 
 def get_content(url):
@@ -36,11 +35,3 @@ def get_content(url):
         links.add(element.get_attribute('href'))
 
     return content, links
-
-
-if __name__ == "__main__":
-    c, l = get_content("https://www.edwarddonner.com")
-    # brochure = brochureGenerator(c, l)
-    # bengaliBrochure = translateBrochure(brochure, language='bengali')
-    # print(bengaliBrochure)
-    print(*brochureGenerator(c, l))
